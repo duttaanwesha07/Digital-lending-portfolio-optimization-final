@@ -1,0 +1,8 @@
+Top features that split VALUE (seasoned regression tree, for Step 7):
+
+  100.0%  ticket_size
+    0.0%  tenure_mo
+    0.0%  interest_rate_apr
+    0.0%  approval_tat_hrs
+    0.0%  age
+    0.0%  first_time_borrower

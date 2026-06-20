@@ -1,0 +1,5 @@
+metric,value,source,status
+flag_volume_monthly_red,525.0,WS-F Step 8,PLACEHOLDER
+flag_volume_monthly_watchlist,3890.0,WS-F Step 8,PLACEHOLDER
+precision_at_red,0.1048,WS-F Step 8,PLACEHOLDER
+lead_time_days_mean_red,108.0,WS-F Step 8,PLACEHOLDER — reconciled to gate4_results.csv (108d, validated source of truth); still placeholder pending 3 business inputs: COLLECTIONS_MONTHLY_CAPACITY, COST_FALSE_POSITIVE, COST_MISSED_DEFAULT

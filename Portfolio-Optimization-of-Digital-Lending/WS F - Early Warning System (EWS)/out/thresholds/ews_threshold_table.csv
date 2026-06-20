@@ -1,0 +1,5 @@
+band,score_range,vol_per_month,pct_book,precision,recall,mean_lead_days,action
+ESCALATION,dpd>=30,977,,0.2787,,0,immediate collections
+RED,>= 0.036,525,0.0308,0.1048,0.7301,104,proactive outreach / restructure
+AMBER,0.003–0.036,3365,0.1974,0.0031,0.1372,0,watchlist / monitor monthly
+GREEN,< 0.003,13158,0.7718,0.0008,0.1327,0,no action

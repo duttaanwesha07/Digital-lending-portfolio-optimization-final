@@ -1,0 +1,5 @@
+cluster,n_customers,pct_customers,n_loans,pct_of_book,dominant_region,dominant_income,dominant_employment,primary_product,primary_product_share,mean_age,mean_cashflow_consistency,mean_credit_utilisation,spending_shock_rate,cust_default_rate_pct,loan_default_rate_seasoned_pct,mean_clv_inr,mean_value_proxy_inr,total_value_proxy_cr,total_originated_cr,pct_loss_making_loans
+C1,10059,25.1,10736,21.6,Urban,Mid,Salaried,Personal,45,42.9,0.752,35.3,0.03,3.29,3.88,16771,15713,16.87,292.1,31.6
+C2,21642,54.1,23094,46.6,Urban,Mid,Salaried,Personal,46,27.3,0.747,35.4,0.031,3.44,4.04,16891,15829,36.55,622.9,30.4
+C3,5208,13.0,11889,24.0,Urban,Mid,Salaried,Personal,41,32.1,0.744,35.9,0.034,9.14,5.36,40111,17571,20.89,370.0,22.8
+C4,3091,7.7,3881,7.8,Semi-urban,Mid,Salaried,Personal,49,32.3,0.554,62.7,0.224,64.19,66.46,-87187,-69440,-26.95,112.6,65.9

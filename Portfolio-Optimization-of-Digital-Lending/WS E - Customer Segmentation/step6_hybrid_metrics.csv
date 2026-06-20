@@ -1,0 +1,8 @@
+segment,n_loans_total,pct_of_book,default_rate_pct,mean_value_proxy_inr,pct_loss_making
+1. BNPL (APR ≤ 32.4%),13180,26.6,6.49,-782.0,78.5
+2. Personal Prime (A-B),9988,20.1,4.34,4803.0,6.0
+3. Personal Mid (C),6513,13.1,7.54,6996.0,7.3
+4. Personal Subprime (D-E),5486,11.1,13.51,5318.0,13.3
+5. SME Prime (A-B),4558,9.2,3.11,33369.0,3.0
+6. SME Non-prime (C-D-E),5461,11.0,8.05,42631.0,7.8
+7. High-APR Danger (>32.4%),4414,8.9,42.06,-1703.0,74.0

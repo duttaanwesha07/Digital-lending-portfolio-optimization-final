@@ -1,0 +1,87 @@
+==========================================================================
+PARAMETER AUDIT
+==========================================================================
+
+[REPRO]
+  ✓ MASTER_SEED                        20260603                                   LOCKED
+  ✓ EWS_VERSION                        0.1-draft                                  SET
+  ✓ WORKSTREAM                         F                                          SET
+
+[PATHS]
+  ✓ PATHS[customers]                   inputs/customers.parquet                   OK
+  ✓ PATHS[loans]                       inputs/loans.parquet                       OK
+  ✓ PATHS[repayments]                  inputs/repayments.parquet                  OK
+  ✓ PATHS[behaviour]                   inputs/behaviour_monthly.parquet           OK
+  ✓ PATHS[segments]                    FINAL/E_final_segment_assignments.csv      OK
+  ✓ PATHS[true_latent]                 validation_only/_true_latent_risk_VAL...   OK
+
+[LABEL]
+  ✓ DEFAULT_DPD                        90                                         LOCKED
+  ✓ PERFORMING_MAX_DPD                 89                                         TUNE
+  ✓ MOB_FLOOR                          3                                          LOCKED
+  ✓ LABEL_WINDOW_H                     3                                          TUNE
+  ✓ DROP_CENSORED_LABELS               True                                       LOCKED
+  ✓ LAST_FULL_WINDOW_MONTH             2026-03                                    TUNE
+
+[PIT]
+  ✓ POINT_IN_TIME                      True                                       LOCKED
+  ✓ TREND_WINDOW                       3                                          SET
+  ✓ VOLATILITY_BASELINE_WINDOW         6                                          SET
+  ✓ STREAK_LOOKBACK                    6                                          SET
+
+[FEATURES]
+  ✓ FEATURE_SPEC count                 13                                         OK
+  ✓ ESCALATION_SPEC count              2                                          OK
+  ✓ signs valid (+1/-1)                True                                       OK
+  ✓ no duplicate names                 True                                       OK
+  ✓ balance_vol_spike removed          True                                       OK
+  ✓ dpd_current NOT a model feature    True                                       OK
+  ✓ dpd_current IS escalation          True                                       OK
+  ✓ balance_volatility_level present   True                                       OK
+
+[TRIGGERS]
+  ✓ escalation rule present            True                                       OK
+
+[SPLIT]
+  ✓ SPLIT_GROUP_KEY                    loan_id                                    LOCKED
+  ✓ STRATIFY_KEYS                      ['label', 'segment']                       TUNE
+  ✓ WITHIN_TIME_TEST_FRAC              0.25                                       TUNE
+  ✓ OOT_TEST_FROM_MONTH                2026-01                                    TUNE
+
+[MODEL]
+  ✓ PRIMARY_MODEL                      scorecard                                  SET
+  ✓ GBM monotone-from-spec             True                                       OK
+  ✓ CALIBRATE_SCORES                   True                                       OK
+
+[GATE4]
+  ✓ lead_time_days_min                 30                                         SET
+  ✓ oot_auc_min                        0.7                                        SET
+  ✓ oot_ks_min                         0.3                                        SET
+  ✓ top_decile_lift_min                2.5                                        SET
+  ✓ stable_across_cohorts              True                                       SET
+  ✓ no_leakage                         True                                       SET
+  ✓ SELF_CURE_EPISODE_RATE             0.35                                       LOCKED(A-046)
+  ✓ BOOTSTRAP_RESAMPLES                200                                        SET
+
+[RAG]
+  ✓ RAG_BANDS[red_min_prob]            0.4                                        TUNE
+  ✓ RAG_BANDS[amber_min_prob]          0.15                                       TUNE
+  ✗ COLLECTIONS_MONTHLY_CAPACITY       None                                       MISSING (Risk Consultant)
+  ✗ COST_FALSE_POSITIVE                None                                       MISSING (Risk Consultant)
+  ✗ COST_MISSED_DEFAULT                None                                       MISSING (Risk Consultant)
+
+[SEGMENTS]
+  ✓ SEGMENTS count                     6                                          OK
+  ✓ PRIORITY_SEGMENTS                  ['3. Personal Non-prime (C-E)', '6. S...   OK
+  ✓ priority subset of segments        True                                       OK
+
+[WIRING]
+  ✓ features build == FEATURE_SPEC     True                                       OK
+  ✓ features carry == ESCALATION_SPEC  True                                       OK
+  ✓ models FEATURES == FEATURE_SPEC    True                                       OK
+  ~ thresholds USING_PLACEHOLDER       True                                       EXPECTED (costs None)
+  ✓ GBM constraints length == features True                                       OK
+
+==========================================================================
+SUMMARY: 52 in-place/OK   1 placeholder-by-design   3 MISSING(business)   0 to-check
+==========================================================================

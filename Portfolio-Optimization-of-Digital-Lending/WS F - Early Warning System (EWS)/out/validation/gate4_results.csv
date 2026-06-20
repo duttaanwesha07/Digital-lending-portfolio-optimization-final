@@ -1,0 +1,7 @@
+check,pass,detail
+lead_time,True,108d >= 30d
+oot_auc,True,0.883 >= 0.7
+oot_ks,True,0.681 >= 0.3
+lift,True,7.6x >= 2.5x
+no_leakage,True,audit clean
+stable,True,CI width 0.047 < 0.15

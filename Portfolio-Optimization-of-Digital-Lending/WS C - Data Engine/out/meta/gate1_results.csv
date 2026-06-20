@@ -1,0 +1,45 @@
+id,group,must_should,measured,criterion,pass
+S1,structural,MUST,"cust uniq=True, loan uniq=True",all keys unique,PASS
+S2,structural,MUST,0,0 orphan FKs,PASS
+S3,structural,MUST,0,no duplicate grain keys,PASS
+S4,structural,MUST,True,contiguous period_index per loan,PASS
+S5,structural,MUST,0,one row per customer-month,PASS
+S6,structural,MUST,"loans=49,600, cust=40,000, split={1: 0.8, 2: 0.16, 3: 0.04}",~50k/40k; split 80/16/4 ±3pp,PASS
+S7,structural,SHOULD,"repayments=381,032 (need 495k-605k), behaviour=350,187 (need 432k-528k)","repayments ~550k, behaviour ~480k (±10%)",FAIL
+Q1,data_quality,MUST,0,must-have fields 100% non-null,PASS
+Q2,data_quality,MUST,0,"age18-65, APR12-48, dpd>=0",PASS
+Q3,data_quality,MUST,products/grades/buckets in declared domains,categorical domains valid,PASS
+Q4,data_quality,MUST,"flags int=int8, cac>=0=True",valid types/units; currency >=0,PASS
+Q5,data_quality,MUST,0,delinquency_bucket reconciles to dpd,PASS
+D1,mix,MUST,"{'BNPL': 0.347, 'Personal': 0.451, 'SME': 0.202}",product ±3pp,PASS
+D2,mix,MUST,"{'Digital ads': 0.347, 'Partner-embedded': 0.248, 'Referral': 0.152, 'DSA': 0.151, 'Organic': 0.102}",channel ±3pp,PASS
+D3,mix,MUST,"{'A': 0.156, 'B': 0.294, 'C': 0.291, 'D': 0.182, 'E': 0.076}",grade ±3pp,PASS
+D4,mix,MUST,region/income/employment,root mixes ±3pp,PASS
+D5,mix,MUST,0.351,new-to-credit ~35% ±3pp,PASS
+D6,mix,SHOULD,"{'BNPL': 11046, 'Personal': 112412, 'SME': 739287}",ticket medians ±20%,PASS
+DR1,default,MUST,7.67%,blended 90+ in 6-9%,PASS
+DR2,default,MUST,"{'BNPL': '10.0%', 'Personal': '7.0%', 'SME': '5.2%'}","BNPL~10>Personal~7>SME~5 (±1.5pp, ordered)",PASS
+DR3,default,MUST,"{'A': '1.7%', 'B': '3.5%', 'C': '6.6%', 'D': '14.3%', 'E': '23.7%'}",A->E strictly increasing & within ±20% rel,PASS
+DR4,default,SHOULD,LGD by product BNPL40/Pers65/SME75 (design),severity SME>Personal>BNPL,PASS
+R1,relationship,MUST,"Low>High, Gig/Inf>Sal, Rural>Urban, NTC>not",all directions hold,PASS
+R2,relationship,MUST,"corr(z,default)=-0.230",negative (lower z -> default),PASS
+R3,relationship,MUST,"{'A': 18.3, 'B': 21.8, 'C': 25.3, 'D': 28.7, 'E': 32.2}",mean APR increases A->E,PASS
+R5,relationship,MUST,median lead 90d (n=3017/3802),median lead >= 60 days,PASS
+R6,relationship,MUST,AUC=0.845,single-feature AUC > 0.6,PASS
+R7,relationship,SHOULD,defaulter missed_cum 5.3 vs 0.8,missed_cum higher for defaulters,PASS
+R8,relationship,SHOULD,"{'Digital ads': '8.2%', 'Partner-embedded': '7.5%', 'Referral': '6.6%', 'DSA': '8.3%', 'Organic': '6.8%'}",Digital/DSA > Organic/Referral,PASS
+R9,relationship,MUST,"cheapest=Organic, slowest=DSA",Organic cheapest; DSA slowest,PASS
+R10,relationship,SHOULD,recent early-delinq 0.212 vs old 0.195,newer cohorts >= older (early delinquency),PASS
+R11,relationship,MUST,"{'A': 6425, 'B': 9469, 'C': 11894, 'D': 10981, 'E': 3872}",grade-A value_proxy > grade-E,PASS
+R12,relationship,SHOULD,"AUC=0.845, delinq-no-90+ proxy=86%",AUC < 0.95 (not a giveaway); cure realism,PASS
+V1,vintage_panel,MUST,cumulative default monotone over MOB 1..24,cumulative default non-decreasing in MOB,PASS
+V2,vintage_panel,SHOULD,older vintages observed longer,older more matured,PASS
+V3,vintage_panel,SHOULD,product seasoning hump (engine design),hazard hump then decline,PASS
+V4,vintage_panel,MUST,max dpd=195,write-off only at dpd>=180; panel stops after,PASS
+V5,vintage_panel,SHOULD,36.5% loans show a cure,some delinquent loans cure,PASS
+V6,vintage_panel,MUST,flag domain 0/1=True; status x default cells=5,default_flag valid & sticky (enforced at gen); non-trivial vs loan_status,PASS
+V7,vintage_panel,SHOULD,"{'BNPL': '0.5%', 'Personal': '14.1%', 'SME': '10.8%'}",lifetime prepay ~Personal15/SME10/BNPL2,PASS
+VP1,value_proxy,MUST,"nulls=0, reconciles=True",no nulls; equals component sum,PASS
+VP2,value_proxy,MUST,68% pos / 32% neg,two-signed,PASS
+VP3,value_proxy,MUST,"{'A': 6425, 'E': 3872}",grade-A mean > grade-E,PASS
+VP4,value_proxy,SHOULD,all finite=True,derived metrics finite/sensible,PASS

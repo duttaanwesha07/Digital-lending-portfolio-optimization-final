@@ -1,0 +1,52 @@
+WS-E Step 4 (v2, seasoned MOB>=3) - Tree risk segments
+Default rates are on seasoned loans only; segments cover all loans.
+==================================================================
+
+T1  (7,721 loans, 15.6% of book | 6,255 seasoned)
+     RULE : origination_risk_grade A; interest_rate_apr ≤ 30.6%
+     RISK : default 2.13% (seasoned) | ever-90+ 1.89%
+     VALUE: mean ₹6,426 | 31.8% loss-making
+
+T2  (14,604 loans, 29.4% of book | 11,929 seasoned)
+     RULE : origination_risk_grade B; interest_rate_apr ≤ 30.6%
+     RISK : default 4.33% (seasoned) | ever-90+ 3.5%
+     VALUE: mean ₹9,469 | 30.8% loss-making
+
+T3  (11,059 loans, 22.3% of book | 9,867 seasoned)
+     RULE : origination_risk_grade C-E; interest_rate_apr ≤ 25.0%
+     RISK : default 7.29% (seasoned) | ever-90+ 6.61%
+     VALUE: mean ₹23,101 | 6.5% loss-making
+
+T4  (9,619 loans, 19.4% of book | 7,799 seasoned)
+     RULE : origination_risk_grade C-E; interest_rate_apr 25.0%-30.6%
+     RISK : default 11.0% (seasoned) | ever-90+ 8.15%
+     VALUE: mean ₹3,355 | 41.3% loss-making
+
+T5  (2,257 loans, 4.6% of book | 1,819 seasoned)
+     RULE : interest_rate_apr 30.6%-32.4%
+     RISK : default 21.22% (seasoned) | ever-90+ 16.22%
+     VALUE: mean ₹1,516 | 39.8% loss-making
+
+T6  (4,340 loans, 8.8% of book | 2,798 seasoned)
+     RULE : interest_rate_apr > 32.4%
+     RISK : default 42.49% (seasoned) | ever-90+ 10.33%
+     VALUE: mean ₹-1,249 | 72.0% loss-making
+
+
+Raw tree (sklearn export_text):
+|--- interest_rate_apr <= 30.62
+|   |--- origination_risk_grade_ord <= 2.50
+|   |   |--- origination_risk_grade_ord <= 1.50
+|   |   |   |--- class: 0
+|   |   |--- origination_risk_grade_ord >  1.50
+|   |   |   |--- class: 0
+|   |--- origination_risk_grade_ord >  2.50
+|   |   |--- interest_rate_apr <= 24.95
+|   |   |   |--- class: 0
+|   |   |--- interest_rate_apr >  24.95
+|   |   |   |--- class: 1
+|--- interest_rate_apr >  30.62
+|   |--- interest_rate_apr <= 32.43
+|   |   |--- class: 1
+|   |--- interest_rate_apr >  32.43
+|   |   |--- class: 1

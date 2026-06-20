@@ -1,0 +1,17 @@
+method,segment,n_loans,pct_of_book,seasoned_default_pct,mean_value_inr,total_value_cr,pct_loss_making
+Heuristic baseline,1. BNPL (all grades),17236,34.8,14.77,-912,-1.57,77.7
+Heuristic baseline,2. Personal Prime (A-B),9988,20.1,4.34,4578,4.57,5.9
+Heuristic baseline,3. Personal Mid (C),6513,13.1,7.54,6648,4.33,6.8
+Heuristic baseline,4. Personal Subprime (D-E),5844,11.8,13.95,5116,2.99,12.6
+Heuristic baseline,5. SME Prime (A-B),4558,9.2,3.11,32204,14.68,2.6
+Heuristic baseline,6. SME Non-prime (C-D-E),5461,11.0,8.05,40955,22.37,7.0
+Decision tree,T1: origination_risk_grade A; interest_rate_apr ≤ 30.6%,7721,15.6,2.13,6426,4.96,31.8
+Decision tree,T2: origination_risk_grade B; interest_rate_apr ≤ 30.6%,14604,29.4,4.33,9469,13.83,30.8
+Decision tree,T3: origination_risk_grade C-E; interest_rate_apr ≤ 25.0%,11059,22.3,7.29,23101,25.55,6.5
+Decision tree,T4: origination_risk_grade C-E; interest_rate_apr 25.0%-30.6%,9619,19.4,11.0,3355,3.23,41.3
+Decision tree,T5: interest_rate_apr 30.6%-32.4%,2257,4.6,21.22,1516,0.34,39.8
+Decision tree,T6: interest_rate_apr > 32.4%,4340,8.8,42.49,-1249,-0.54,72.0
+Clustering,C1,10736,21.6,3.88,15713,16.87,31.6
+Clustering,C2,23094,46.6,4.04,15829,36.55,30.4
+Clustering,C3,11889,24.0,5.36,17571,20.89,22.8
+Clustering,C4,3881,7.8,66.46,-69440,-26.95,65.9

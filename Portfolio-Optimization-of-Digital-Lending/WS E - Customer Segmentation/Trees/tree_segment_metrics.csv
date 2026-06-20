@@ -1,0 +1,7 @@
+segment,n_loans,n_seasoned,n_customers,pct_of_book,total_originated_cr,pct_of_orig,default_rate_pct,ever_90_rate_pct,mean_ticket_inr,mean_apr_pct,mean_value_proxy_inr,total_value_proxy_cr,pct_loss_making
+T1: origination_risk_grade A; interest_rate_apr ≤ 30.6%,7721,6255,6563,15.6,233.7,16.7,2.13,1.89,302673,18.3,6426,4.96,31.8
+T2: origination_risk_grade B; interest_rate_apr ≤ 30.6%,14604,11929,12491,29.4,447.9,32.0,4.33,3.5,306722,21.8,9469,13.83,30.8
+T3: origination_risk_grade C-E; interest_rate_apr ≤ 25.0%,11059,9867,10088,22.3,571.7,40.9,7.29,6.61,516912,22.8,23101,25.55,6.5
+T4: origination_risk_grade C-E; interest_rate_apr 25.0%-30.6%,9619,7799,8976,19.4,119.3,8.5,11.0,8.15,124065,28.7,3355,3.23,41.3
+T5: interest_rate_apr 30.6%-32.4%,2257,1819,2168,4.6,16.0,1.1,21.22,16.22,70888,31.7,1516,0.34,39.8
+T6: interest_rate_apr > 32.4%,4340,2798,4038,8.8,9.0,0.6,42.49,10.33,20761,34.0,-1249,-0.54,72.0

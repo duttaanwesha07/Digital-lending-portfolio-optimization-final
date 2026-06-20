@@ -1,0 +1,46 @@
+table,variable,type,allowed_values,must_nice,derivation,description
+customers,customer_id,string,"C+6 digits, unique",M,Structural,Customer key
+customers,region_type,categorical,Urban/Semi-urban/Rural,M,Independent root,Geography
+customers,income_proxy_band,ordinal,Low/Mid/High,M,Independent root,Income proxy
+customers,employment_type,categorical,Salaried/Self-employed/Gig/Informal,M,Independent root,Employment
+customers,age,integer,18-65,N,Independent root,Age in years
+customers,first_time_borrower,flag,0/1,M,Independent root,New-to-credit
+customers,credit_quality_indicator,ordinal,A-E,M,Risk-engine,Bureau band (noisy obs of z)
+customers,acquisition_channel,categorical,Digital ads/Partner-embedded/Referral/DSA/Organic,M,Independent root,Acquisition channel
+customers,cac,int (INR),>=0,M,Derived,Cost of acquisition
+loans,loan_id,string,"L+7 digits, unique",M,Structural,Loan key
+loans,customer_id,string,FK->customers,M,Structural,Owning customer
+loans,loan_sequence,integer,1-3,M,Derived,1=first loan
+loans,product_type,categorical,Personal/BNPL/SME,M,Independent root,Product
+loans,ticket_size,int (INR),product bands,M,Derived,Loan amount
+loans,tenure_mo,integer,product bands,M,Derived,Contractual months
+loans,interest_rate_apr,float (%),12-48,M,Risk-engine,Priced APR
+loans,origination_risk_grade,ordinal,A-E,M,Risk-engine,Grade at underwriting
+loans,origination_date,date,ISO-8601,M,Independent root,Origination day
+loans,origination_cohort,string,YYYY-MM,M,Derived,Vintage month
+loans,approval_tat_hrs,float (hrs),~0.1-72,M,Derived,Onboarding TAT
+loans,months_on_book,integer,>=0,M,Derived,MOB at snapshot/closure
+loans,loan_status,categorical,Active/Closed/Written-off,M,Derived,As-of-snapshot status
+loans,default_flag,flag,0/1,M,Risk-engine,Ever 90+ DPD (sticky)
+loans,value_proxy,int (INR),may be negative,M,Derived,Risk-adj. contribution
+repayments,loan_id,string,FK->loans,M,Structural,Owning loan
+repayments,period_index,integer,1..tenure,M,Structural,Scheduled period
+repayments,period_date,date,ISO-8601,M,Derived,Period date
+repayments,scheduled_emi,int (INR),>0,M,Derived,Amortised EMI
+repayments,outstanding_balance,int (INR),>=0,M,Derived,Opening principal; EAD basis
+repayments,amount_paid,int (INR),>=0,M,Risk-engine,Paid this period
+repayments,dpd,integer,>=0,M,Risk-engine,Days past due
+repayments,delinquency_bucket,ordinal,Current/1-30/31-60/61-90/90+,M,Derived,DPD bucket
+repayments,paid_on_time_flag,flag,0/1,M,Derived,Full & current
+repayments,partial_payment_flag,flag,0/1,M,Derived,Partial payment
+repayments,missed_payments_cum,integer,>=0,M,Derived,Cumulative misses
+repayments,prepayment_flag,flag,0/1,N,Risk-engine,Early settlement
+behaviour_monthly,customer_id,string,FK->customers,M,Structural,Owning customer
+behaviour_monthly,month,string,YYYY-MM,M,Structural,Snapshot month
+behaviour_monthly,cashflow_consistency,float,0-1,M,Risk-engine+shock,Inflow regularity; falls pre-default
+behaviour_monthly,balance_volatility,float,>=0,M,Risk-engine+shock,Balance std; rises pre-default
+behaviour_monthly,spending_shock_flag,flag,0/1,M,Risk-engine+shock,Outflow spike
+behaviour_monthly,nach_bounce_count,integer,0-5,M,Risk-engine+shock,Auto-debit failures (3m)
+behaviour_monthly,credit_utilisation,float (%),0-150,N,Risk-engine+shock,Revolving utilisation
+behaviour_monthly,bureau_inquiry_velocity,integer,0-10,N,Risk-engine+shock,Inquiries last 90d
+behaviour_monthly,app_engagement,float,>=0,N,Risk-engine+shock,Sessions/month

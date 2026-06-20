@@ -1,0 +1,133 @@
+{
+  "workstream": "F \u2014 Early Warning System",
+  "ews_version": "0.1-draft",
+  "frozen_utc": "2026-06-12T11:31:18Z",
+  "seed": 20260603,
+  "gate4_verdict": "PASS",
+  "build_order": [
+    "spine",
+    "labels",
+    "features",
+    "split",
+    "models",
+    "validation",
+    "thresholds",
+    "segment_overlay",
+    "freeze"
+  ],
+  "model": {
+    "primary": "scorecard",
+    "challenger": "monotonic_gbm",
+    "calibration": "grouped-by-loan OOF isotonic",
+    "monotone": "scorecard isotonic bins + GBM constraints from FEATURE_SPEC"
+  },
+  "features_model": [
+    "bounce_streak",
+    "bounce_count_3m",
+    "spending_shock_recency",
+    "spending_shock_rate_3m",
+    "utilisation_level",
+    "utilisation_creep_3m",
+    "balance_volatility_level",
+    "cashflow_consistency_level",
+    "cashflow_consistency_slope",
+    "inquiry_velocity_accel",
+    "app_engagement_drop",
+    "partial_run",
+    "first_bounce_flag"
+  ],
+  "features_escalation_excluded": [
+    "dpd_current",
+    "missed_cum_at_t"
+  ],
+  "label": {
+    "window_H_months": 3,
+    "mob_floor": 3,
+    "default_dpd": 90,
+    "censoring": "status-aware (Active=censor, terminal=observed-survival)"
+  },
+  "split": {
+    "within_time": "loans-whole stratified",
+    "out_of_time": "purged+embargoed temporal, test>=2026-01, embargo=3mo  [DEVIATION: not loan-disjoint \u2014 ratify]"
+  },
+  "band_cuts": {
+    "red_ge": 0.0361,
+    "amber_ge": 0.0028,
+    "basis": "PLACEHOLDER capacity/costs (F-A050..053) \u2014 Risk Consultant to confirm"
+  },
+  "gate4_checks": {
+    "lead_time": {
+      "pass": true,
+      "detail": "108d >= 30d"
+    },
+    "oot_auc": {
+      "pass": true,
+      "detail": "0.883 >= 0.7"
+    },
+    "oot_ks": {
+      "pass": true,
+      "detail": "0.681 >= 0.3"
+    },
+    "lift": {
+      "pass": true,
+      "detail": "7.6x >= 2.5x"
+    },
+    "no_leakage": {
+      "pass": true,
+      "detail": "audit clean"
+    },
+    "stable": {
+      "pass": true,
+      "detail": "CI width 0.047 < 0.15"
+    }
+  },
+  "headline_metrics": {
+    "oot_auc_clean_dpd0": 0.883,
+    "ks": 0.681,
+    "top_decile_lift": 7.6,
+    "lead_days_median_oos": 91,
+    "lead_days_mean_oos": 108,
+    "watchlist_recall": 0.87,
+    "behavioural_distress_lift": 17.6
+  },
+  "deviations_and_open_items": [
+    "OOT split is purged+embargoed temporal (not loan-disjoint) \u2014 methodologically standard, RATIFY",
+    "RED/AMBER capacity & FP/missed costs are PLACEHOLDER (F-A050..053) \u2014 block final thresholds",
+    "AMBER volume overshoots placeholder capacity due to calibrated-score ties at low end",
+    "Watchlist snapshot = 2026-03 (latest full-window); production refreshes on live month",
+    "Full-book AUC (0.957) inflated by already-delinquent loans \u2014 report the 0.883 clean number"
+  ],
+  "assumptions_referenced": [
+    "A-019 true_latent never a feature",
+    "A-046 ~35% self-cure ceiling",
+    "F-A050..053 capacity & cost placeholders"
+  ],
+  "determinism": {
+    "reproduced": true,
+    "scorecard_max_abs_diff": 0.0,
+    "gbm_max_abs_diff": 0.0
+  },
+  "deliverables": {
+    "score_definition": "model/models.py (scorecard primary)",
+    "watchlist": "out/watchlist/ews_watchlist_current.csv",
+    "threshold_table": "out/thresholds/ews_threshold_table.csv",
+    "validation_pack": "out/validation/gate4_results.csv + validate/validation.py",
+    "flag_rates_by_segment": "out/watchlist/flag_rates_by_segment.csv"
+  },
+  "output_inventory_md5": {
+    "frame/feature_matrix.parquet": "83dc49da40",
+    "frame/feature_matrix_sample.csv": "c84c24e809",
+    "frame/feature_matrix_split.parquet": "670ef6cfc6",
+    "frame/labelled_spine.parquet": "285c7ac121",
+    "frame/labelled_spine_sample.csv": "e194a5e23c",
+    "frame/observation_spine.parquet": "4ad834ba48",
+    "frame/observation_spine_sample.csv": "c0fd3b0926",
+    "scores/scores.parquet": "551b9b6fa7",
+    "thresholds/assumptions_F_step8.csv": "37ec698863",
+    "thresholds/controlled_headlines.csv": "4e6b6136a4",
+    "thresholds/ews_threshold_table.csv": "bf9d50f858",
+    "validation/gate4_results.csv": "de5f3488fc",
+    "watchlist/ews_watchlist_current.csv": "432d6b32ae",
+    "watchlist/flag_rates_by_segment.csv": "1914e1b238"
+  }
+}

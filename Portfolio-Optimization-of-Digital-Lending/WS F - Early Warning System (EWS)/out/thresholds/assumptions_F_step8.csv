@@ -1,0 +1,5 @@
+id,assumption,value,status,rationale
+F-A050,collections RED capacity/month,500,PLACEHOLDER,intensive-work team limit
+F-A051,collections AMBER capacity/month,1500,PLACEHOLDER,watch-tier team limit
+F-A052,cost of false positive (INR),300,PLACEHOLDER,soft-touch outreach cost
+F-A053,cost of missed default (INR),25000,PLACEHOLDER,avg loss on a missed 90+

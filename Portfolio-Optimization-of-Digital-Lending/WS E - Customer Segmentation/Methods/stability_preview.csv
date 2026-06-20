@@ -1,0 +1,4 @@
+method,metric_cv,membership_ARI
+Heuristic baseline,0.0488,1.0
+Decision tree,0.0445,0.799
+Clustering,0.0354,0.993

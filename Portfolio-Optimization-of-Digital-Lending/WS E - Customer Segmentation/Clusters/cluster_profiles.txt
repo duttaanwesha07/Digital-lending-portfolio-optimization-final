@@ -1,0 +1,28 @@
+WS-E Step 5 - k-prototypes clusters (k=4); customer-grain, loans inherit.
+Default rates on seasoned loans (MOB>=3). Provisional C-labels; naming is Step 8.
+======================================================================
+
+C1  (10,059 customers, 25.1% | 10,736 loans)
+     WHO   : mostly Urban (46%), Mid-income, Salaried; primarily Personal (45%)
+     BEHAVE: cashflow consistency 0.75, utilisation 35.3%, shock rate 0.03
+     RISK  : seasoned loan default 3.88% (customer ever-default 3.3%)
+     VALUE : mean CLV ₹16,771 | 31.6% loss-making loans
+
+C2  (21,642 customers, 54.1% | 23,094 loans)
+     WHO   : mostly Urban (45%), Mid-income, Salaried; primarily Personal (46%)
+     BEHAVE: cashflow consistency 0.75, utilisation 35.4%, shock rate 0.03
+     RISK  : seasoned loan default 4.04% (customer ever-default 3.4%)
+     VALUE : mean CLV ₹16,891 | 30.4% loss-making loans
+
+C3  (5,208 customers, 13.0% | 11,889 loans)
+     WHO   : mostly Urban (46%), Mid-income, Salaried; primarily Personal (41%)
+     BEHAVE: cashflow consistency 0.74, utilisation 35.9%, shock rate 0.03
+     RISK  : seasoned loan default 5.36% (customer ever-default 9.1%)
+     VALUE : mean CLV ₹40,111 | 22.8% loss-making loans
+
+C4  (3,091 customers, 7.7% | 3,881 loans)
+     WHO   : mostly Semi-urban (43%), Mid-income, Salaried; primarily Personal (49%)
+     BEHAVE: cashflow consistency 0.55, utilisation 62.7%, shock rate 0.22
+     RISK  : seasoned loan default 66.46% (customer ever-default 64.2%)
+     VALUE : mean CLV ₹-87,187 | 65.9% loss-making loans
+

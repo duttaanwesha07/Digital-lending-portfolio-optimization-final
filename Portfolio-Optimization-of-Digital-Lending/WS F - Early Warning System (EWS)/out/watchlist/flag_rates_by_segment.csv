@@ -1,0 +1,7 @@
+segment,n,pct_escalation,pct_red,pct_amber,pct_watchlist
+1. BNPL (grade A-C),690,0.2406,0.0116,0.1377,0.1493
+2. Personal Prime (A-B),5175,0.0257,0.0126,0.1219,0.1345
+3. Personal Non-prime (C-E),6483,0.0654,0.0416,0.2362,0.2778
+4. SME Prime (A-B),2768,0.0235,0.0155,0.1228,0.1384
+5. SME Non-prime (C-E),3313,0.0543,0.0519,0.2397,0.2916
+6. Subprime BNPL (D-E),109,0.5688,0.0,0.1376,0.1376

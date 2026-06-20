@@ -1,0 +1,407 @@
+[
+  {
+    "table": "customers",
+    "variable": "customer_id",
+    "type": "string",
+    "allowed_values": "C+6 digits, unique",
+    "must_nice": "M",
+    "derivation": "Structural",
+    "description": "Customer key"
+  },
+  {
+    "table": "customers",
+    "variable": "region_type",
+    "type": "categorical",
+    "allowed_values": "Urban/Semi-urban/Rural",
+    "must_nice": "M",
+    "derivation": "Independent root",
+    "description": "Geography"
+  },
+  {
+    "table": "customers",
+    "variable": "income_proxy_band",
+    "type": "ordinal",
+    "allowed_values": "Low/Mid/High",
+    "must_nice": "M",
+    "derivation": "Independent root",
+    "description": "Income proxy"
+  },
+  {
+    "table": "customers",
+    "variable": "employment_type",
+    "type": "categorical",
+    "allowed_values": "Salaried/Self-employed/Gig/Informal",
+    "must_nice": "M",
+    "derivation": "Independent root",
+    "description": "Employment"
+  },
+  {
+    "table": "customers",
+    "variable": "age",
+    "type": "integer",
+    "allowed_values": "18-65",
+    "must_nice": "N",
+    "derivation": "Independent root",
+    "description": "Age in years"
+  },
+  {
+    "table": "customers",
+    "variable": "first_time_borrower",
+    "type": "flag",
+    "allowed_values": "0/1",
+    "must_nice": "M",
+    "derivation": "Independent root",
+    "description": "New-to-credit"
+  },
+  {
+    "table": "customers",
+    "variable": "credit_quality_indicator",
+    "type": "ordinal",
+    "allowed_values": "A-E",
+    "must_nice": "M",
+    "derivation": "Risk-engine",
+    "description": "Bureau band (noisy obs of z)"
+  },
+  {
+    "table": "customers",
+    "variable": "acquisition_channel",
+    "type": "categorical",
+    "allowed_values": "Digital ads/Partner-embedded/Referral/DSA/Organic",
+    "must_nice": "M",
+    "derivation": "Independent root",
+    "description": "Acquisition channel"
+  },
+  {
+    "table": "customers",
+    "variable": "cac",
+    "type": "int (INR)",
+    "allowed_values": ">=0",
+    "must_nice": "M",
+    "derivation": "Derived",
+    "description": "Cost of acquisition"
+  },
+  {
+    "table": "loans",
+    "variable": "loan_id",
+    "type": "string",
+    "allowed_values": "L+7 digits, unique",
+    "must_nice": "M",
+    "derivation": "Structural",
+    "description": "Loan key"
+  },
+  {
+    "table": "loans",
+    "variable": "customer_id",
+    "type": "string",
+    "allowed_values": "FK->customers",
+    "must_nice": "M",
+    "derivation": "Structural",
+    "description": "Owning customer"
+  },
+  {
+    "table": "loans",
+    "variable": "loan_sequence",
+    "type": "integer",
+    "allowed_values": "1-3",
+    "must_nice": "M",
+    "derivation": "Derived",
+    "description": "1=first loan"
+  },
+  {
+    "table": "loans",
+    "variable": "product_type",
+    "type": "categorical",
+    "allowed_values": "Personal/BNPL/SME",
+    "must_nice": "M",
+    "derivation": "Independent root",
+    "description": "Product"
+  },
+  {
+    "table": "loans",
+    "variable": "ticket_size",
+    "type": "int (INR)",
+    "allowed_values": "product bands",
+    "must_nice": "M",
+    "derivation": "Derived",
+    "description": "Loan amount"
+  },
+  {
+    "table": "loans",
+    "variable": "tenure_mo",
+    "type": "integer",
+    "allowed_values": "product bands",
+    "must_nice": "M",
+    "derivation": "Derived",
+    "description": "Contractual months"
+  },
+  {
+    "table": "loans",
+    "variable": "interest_rate_apr",
+    "type": "float (%)",
+    "allowed_values": "12-48",
+    "must_nice": "M",
+    "derivation": "Risk-engine",
+    "description": "Priced APR"
+  },
+  {
+    "table": "loans",
+    "variable": "origination_risk_grade",
+    "type": "ordinal",
+    "allowed_values": "A-E",
+    "must_nice": "M",
+    "derivation": "Risk-engine",
+    "description": "Grade at underwriting"
+  },
+  {
+    "table": "loans",
+    "variable": "origination_date",
+    "type": "date",
+    "allowed_values": "ISO-8601",
+    "must_nice": "M",
+    "derivation": "Independent root",
+    "description": "Origination day"
+  },
+  {
+    "table": "loans",
+    "variable": "origination_cohort",
+    "type": "string",
+    "allowed_values": "YYYY-MM",
+    "must_nice": "M",
+    "derivation": "Derived",
+    "description": "Vintage month"
+  },
+  {
+    "table": "loans",
+    "variable": "approval_tat_hrs",
+    "type": "float (hrs)",
+    "allowed_values": "~0.1-72",
+    "must_nice": "M",
+    "derivation": "Derived",
+    "description": "Onboarding TAT"
+  },
+  {
+    "table": "loans",
+    "variable": "months_on_book",
+    "type": "integer",
+    "allowed_values": ">=0",
+    "must_nice": "M",
+    "derivation": "Derived",
+    "description": "MOB at snapshot/closure"
+  },
+  {
+    "table": "loans",
+    "variable": "loan_status",
+    "type": "categorical",
+    "allowed_values": "Active/Closed/Written-off",
+    "must_nice": "M",
+    "derivation": "Derived",
+    "description": "As-of-snapshot status"
+  },
+  {
+    "table": "loans",
+    "variable": "default_flag",
+    "type": "flag",
+    "allowed_values": "0/1",
+    "must_nice": "M",
+    "derivation": "Risk-engine",
+    "description": "Ever 90+ DPD (sticky)"
+  },
+  {
+    "table": "loans",
+    "variable": "value_proxy",
+    "type": "int (INR)",
+    "allowed_values": "may be negative",
+    "must_nice": "M",
+    "derivation": "Derived",
+    "description": "Risk-adj. contribution"
+  },
+  {
+    "table": "repayments",
+    "variable": "loan_id",
+    "type": "string",
+    "allowed_values": "FK->loans",
+    "must_nice": "M",
+    "derivation": "Structural",
+    "description": "Owning loan"
+  },
+  {
+    "table": "repayments",
+    "variable": "period_index",
+    "type": "integer",
+    "allowed_values": "1..tenure",
+    "must_nice": "M",
+    "derivation": "Structural",
+    "description": "Scheduled period"
+  },
+  {
+    "table": "repayments",
+    "variable": "period_date",
+    "type": "date",
+    "allowed_values": "ISO-8601",
+    "must_nice": "M",
+    "derivation": "Derived",
+    "description": "Period date"
+  },
+  {
+    "table": "repayments",
+    "variable": "scheduled_emi",
+    "type": "int (INR)",
+    "allowed_values": ">0",
+    "must_nice": "M",
+    "derivation": "Derived",
+    "description": "Amortised EMI"
+  },
+  {
+    "table": "repayments",
+    "variable": "outstanding_balance",
+    "type": "int (INR)",
+    "allowed_values": ">=0",
+    "must_nice": "M",
+    "derivation": "Derived",
+    "description": "Opening principal; EAD basis"
+  },
+  {
+    "table": "repayments",
+    "variable": "amount_paid",
+    "type": "int (INR)",
+    "allowed_values": ">=0",
+    "must_nice": "M",
+    "derivation": "Risk-engine",
+    "description": "Paid this period"
+  },
+  {
+    "table": "repayments",
+    "variable": "dpd",
+    "type": "integer",
+    "allowed_values": ">=0",
+    "must_nice": "M",
+    "derivation": "Risk-engine",
+    "description": "Days past due"
+  },
+  {
+    "table": "repayments",
+    "variable": "delinquency_bucket",
+    "type": "ordinal",
+    "allowed_values": "Current/1-30/31-60/61-90/90+",
+    "must_nice": "M",
+    "derivation": "Derived",
+    "description": "DPD bucket"
+  },
+  {
+    "table": "repayments",
+    "variable": "paid_on_time_flag",
+    "type": "flag",
+    "allowed_values": "0/1",
+    "must_nice": "M",
+    "derivation": "Derived",
+    "description": "Full & current"
+  },
+  {
+    "table": "repayments",
+    "variable": "partial_payment_flag",
+    "type": "flag",
+    "allowed_values": "0/1",
+    "must_nice": "M",
+    "derivation": "Derived",
+    "description": "Partial payment"
+  },
+  {
+    "table": "repayments",
+    "variable": "missed_payments_cum",
+    "type": "integer",
+    "allowed_values": ">=0",
+    "must_nice": "M",
+    "derivation": "Derived",
+    "description": "Cumulative misses"
+  },
+  {
+    "table": "repayments",
+    "variable": "prepayment_flag",
+    "type": "flag",
+    "allowed_values": "0/1",
+    "must_nice": "N",
+    "derivation": "Risk-engine",
+    "description": "Early settlement"
+  },
+  {
+    "table": "behaviour_monthly",
+    "variable": "customer_id",
+    "type": "string",
+    "allowed_values": "FK->customers",
+    "must_nice": "M",
+    "derivation": "Structural",
+    "description": "Owning customer"
+  },
+  {
+    "table": "behaviour_monthly",
+    "variable": "month",
+    "type": "string",
+    "allowed_values": "YYYY-MM",
+    "must_nice": "M",
+    "derivation": "Structural",
+    "description": "Snapshot month"
+  },
+  {
+    "table": "behaviour_monthly",
+    "variable": "cashflow_consistency",
+    "type": "float",
+    "allowed_values": "0-1",
+    "must_nice": "M",
+    "derivation": "Risk-engine+shock",
+    "description": "Inflow regularity; falls pre-default"
+  },
+  {
+    "table": "behaviour_monthly",
+    "variable": "balance_volatility",
+    "type": "float",
+    "allowed_values": ">=0",
+    "must_nice": "M",
+    "derivation": "Risk-engine+shock",
+    "description": "Balance std; rises pre-default"
+  },
+  {
+    "table": "behaviour_monthly",
+    "variable": "spending_shock_flag",
+    "type": "flag",
+    "allowed_values": "0/1",
+    "must_nice": "M",
+    "derivation": "Risk-engine+shock",
+    "description": "Outflow spike"
+  },
+  {
+    "table": "behaviour_monthly",
+    "variable": "nach_bounce_count",
+    "type": "integer",
+    "allowed_values": "0-5",
+    "must_nice": "M",
+    "derivation": "Risk-engine+shock",
+    "description": "Auto-debit failures (3m)"
+  },
+  {
+    "table": "behaviour_monthly",
+    "variable": "credit_utilisation",
+    "type": "float (%)",
+    "allowed_values": "0-150",
+    "must_nice": "N",
+    "derivation": "Risk-engine+shock",
+    "description": "Revolving utilisation"
+  },
+  {
+    "table": "behaviour_monthly",
+    "variable": "bureau_inquiry_velocity",
+    "type": "integer",
+    "allowed_values": "0-10",
+    "must_nice": "N",
+    "derivation": "Risk-engine+shock",
+    "description": "Inquiries last 90d"
+  },
+  {
+    "table": "behaviour_monthly",
+    "variable": "app_engagement",
+    "type": "float",
+    "allowed_values": ">=0",
+    "must_nice": "N",
+    "derivation": "Risk-engine+shock",
+    "description": "Sessions/month"
+  }
+]

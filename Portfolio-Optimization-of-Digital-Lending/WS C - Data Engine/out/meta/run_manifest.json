@@ -1,0 +1,50 @@
+{
+  "dataset": "Digital Lending Portfolio Optimization \u2014 synthetic",
+  "master_seed": 20260603,
+  "spec_version": "1.1",
+  "generated_utc": "2026-06-03T22:49:12.707511+00:00",
+  "generation_order": [
+    "customers",
+    "loans",
+    "engine(repayments+behaviour)",
+    "outcomes",
+    "assemble"
+  ],
+  "row_counts": {
+    "customers": 40000,
+    "loans": 49600,
+    "repayments": 381032,
+    "behaviour_monthly": 350187
+  },
+  "internal_fields_excluded": [
+    "true_latent_risk (stashed in meta/_true_latent_risk.parquet)"
+  ],
+  "gate1_result": {
+    "verdict": "PASS",
+    "must_pass": 32,
+    "must_total": 32,
+    "should_pass": 11,
+    "should_total": 12
+  },
+  "files": {
+    "parquet": [
+      "out/data/parquet/customers.parquet",
+      "out/data/parquet/loans.parquet",
+      "out/data/parquet/repayments.parquet",
+      "out/data/parquet/behaviour_monthly.parquet"
+    ],
+    "csv": [
+      "out/data/csv/customers.csv",
+      "out/data/csv/loans.csv",
+      "out/data/csv/repayments.csv",
+      "out/data/csv/behaviour_monthly.csv"
+    ],
+    "meta": [
+      "out/meta/data_dictionary.csv",
+      "out/meta/data_dictionary.json",
+      "out/meta/run_manifest.json",
+      "out/meta/value_proxy_components.csv",
+      "out/meta/_true_latent_risk.parquet"
+    ]
+  }
+}
